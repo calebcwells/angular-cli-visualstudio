@@ -1,0 +1,34 @@
+{
+  "project": {
+    "version": "1.0.0-beta.24",
+    "name": "angular2cli"
+  },
+  "apps": [
+    {
+      "root": "Client",
+      "main": "main.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "ng2cli",
+      "mobile": false,
+      "styles": [
+        "styles.css"
+      ]
+    }
+  ],
+  "defaults": {
+    "styleExt": "css",
+    "prefixInterfaces": false,
+    "inline": {
+      "style": false,
+      "template": false
+    },
+    "spec": {
+      "class": false,
+      "component": false,
+      "directive": false,
+      "module": false,
+      "pipe": false,
+      "service": false
+    }
+  }
+}
