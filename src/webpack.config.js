@@ -1,6 +1,7 @@
 var IsDev = process.argv.indexOf('--env.prod') < 0;
 var Path = require('path');
 var Webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 module.exports = {
@@ -15,6 +16,7 @@ module.exports = {
         publicPath: '/dist/'
     },
     plugins: [
+        new ExtractTextPlugin({ filename: '[name].css' }),
         new ForkCheckerPlugin(),
         new Webpack.DllReferencePlugin({
             context: __dirname,
@@ -28,7 +30,7 @@ module.exports = {
         loaders: [
             { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript', 'angular2-template'] },
             { test: /\.html$/, loader: 'html' },
-            { test: /\.css/, loader: 'style!css' },
+            { test: /\.css$/, loader: [ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' }), 'to-string-loader', 'css-loader'] },
             { test: /\.svg$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
             { test: /\.(jpeg|jpg|gif|png|json)$/, loaders: ["file-loader?name=[name]-[hash:12].[ext]"] }
         ]
