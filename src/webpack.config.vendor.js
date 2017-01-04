@@ -1,6 +1,8 @@
 var IsDev = process.argv.indexOf('--env.prod') < 0;
 var Path = require('path');
 var Webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ExtractCss = new ExtractTextPlugin('vendor.css');
 
 module.exports = {
     resolve: {
@@ -8,6 +10,7 @@ module.exports = {
     },
     module: {
         loaders: [
+            { test: /\.css/, loader: ExtractCss.extract(['css']) },
             { test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/, loader: 'url?limit=100000&name=[name].[ext]' },
             { test: /\.json$/, loader: 'json-loader' }
         ]
@@ -21,7 +24,8 @@ module.exports = {
             '@angular/forms',
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic',
-            '@angular/router'
+            '@angular/router',
+            'semantic-ui/dist/semantic.css'
         ]
     },
     output: {
@@ -30,6 +34,7 @@ module.exports = {
         library: '[name]_[hash]'
     },
     plugins: [
+        ExtractCss,
         new Webpack.optimize.OccurrenceOrderPlugin(),
         new Webpack.DllPlugin({
             path: Path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
