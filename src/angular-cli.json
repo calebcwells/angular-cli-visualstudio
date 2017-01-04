@@ -6,6 +6,9 @@
   "apps": [
     {
       "root": "Client",
+      "assets": [
+        "favicon.ico"
+      ],
       "main": "main.ts",
       "tsconfig": "tsconfig.json",
       "prefix": "ng2cli",
