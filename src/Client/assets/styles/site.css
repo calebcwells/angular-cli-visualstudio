@@ -1,0 +1,54 @@
+.ui.items > .item {
+    border: 1px solid rgba(255, 255, 255, 0.0);
+    border-radius: 5px;
+}
+
+    .ui.items > .item.selected {
+        border: 1px solid hsla(285, 59.4%, 49.2%, 0.41);
+        border-radius: 5px;
+    }
+
+    .ui.items > .item > .content > .header {
+        padding-top: 1em;
+    }
+
+.products-list {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.product-row {
+    border-bottom: 1px solid black;
+}
+
+.product-image {
+    float: left;
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+}
+
+.product-info {
+    padding: 30px;
+    float: left;
+}
+
+.price-display {
+    padding: 30px;
+    float: right;
+}
+
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1;
+}

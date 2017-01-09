@@ -1,0 +1,7 @@
+<div class="ui items">
+    <ng2cli-product-row *ngFor="let myProduct of productList"
+                 [product]="myProduct"
+                 (click)='clicked(myProduct)'
+                 [class.selected]="isSelected(myProduct)">
+    </ng2cli-product-row>
+</div>

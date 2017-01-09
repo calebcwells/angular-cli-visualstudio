@@ -1,3 +1,19 @@
-<h1>
-    {{title}}
-</h1>
+<div class="ui menu">
+    <div class="ui container">
+        <a href="#" class="header item">
+            <img class="logo" src="../assets/images/logo.png">
+        </a>
+        <div class="header item borderless">
+            <h1 class="ui header">
+                Angular 2 Inventory App
+            </h1>
+        </div>
+    </div>
+</div>
+<div class="ui text container">
+    <div class="inventory-app">
+        <ng2cli-products-list [productList]="products"
+                       (onProductSelected)="productWasSelected($event)">
+        </ng2cli-products-list>
+    </div>
+</div>

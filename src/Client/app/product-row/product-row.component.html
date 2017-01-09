@@ -1,0 +1,11 @@
+<ng2cli-product-image [product]="product"></ng2cli-product-image>
+<div class="content">
+    <div class="header">{{ product.name }}</div>
+    <div class="meta">
+        <div class="product-sku">SKU #{{ product.sku }}</div>
+    </div>
+    <div class="description">
+        <ng2cli-product-department [product]="product"></ng2cli-product-department>
+    </div>
+</div>
+<ng2cli-price-display [price]="product.price"></ng2cli-price-display>

@@ -32,7 +32,7 @@ module.exports = {
             { test: /\.html$/, loader: 'html' },
             { test: /\.css$/, loader: [ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' }), 'to-string-loader', 'css-loader'] },
             { test: /\.svg$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
-            { test: /\.(jpeg|jpg|gif|png|json)$/, loaders: ["file-loader?name=[name]-[hash:12].[ext]"] }
+            { test: /\.(jpeg|jpg|gif|png|json)$/, loaders: ['file-loader?name=[name].[ext]'] }
         ]
     },
     profile: true,
