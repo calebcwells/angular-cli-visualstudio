@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
   selector: 'ng2cli-app',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
-    title = 'app works!';
-}
+export class AppComponent { }
