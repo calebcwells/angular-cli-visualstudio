@@ -1,28 +1,33 @@
-# Ng2Cli
+﻿# Integrating Angular CLI with dotnet in Visual Studio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+## Phase 1
 
-## Development server
+Make sure you have Node version 6 or greater installed and have also installed Angular CLI, `npm i -g angular/cli@latest`.
+
+When you create a new CLI project it will create the folder and put all necessary files into that folder. Open a command prompt and navigate to where you would like the project to reside and type in `ng new {app name}`.
+
+Open the folder created for your project and in the same command prompt type `dotnet new web` to create an empty Visual Studio web application.
+
+When you open the .proj file that was created it will create a solution for you to hold the project. Make sure you close the solution so that it can save the .sln file before you continue.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Phase 2
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+Install the [NPM Task Runner](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.NPMTaskRunner) and then right click on the package.json file in Visual Studio explorer and select Task Runner Explorer. Right click on the start option and check After Build under Bindings.
 
-## Build
+Update the start script in your package.json file to `ng serve -o`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Make sure that you follow the instructions in this [article](https://blogs.msdn.microsoft.com/webdev/2015/03/19/customize-external-web-tools-in-visual-studio-2015/) to use the most recent version of Node installed on your PC.
 
-## Running unit tests
+Open a command prompt to your project folder and type in `dotnet add package Microsoft.AspNetCore.StaticFiles`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In Visual Studio open Startup.cs and remove the app.Run code inside the Configure section. Add `app.UseDefaultFiles(); app.UseStaticFiles();`
 
-## Running end-to-end tests
+Change the outDir in the angular-cli.json from dist to wwwroot.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Now when you build your solution in Visual Studio it will kick off ng serve and open a new browser window pointing to `http://localhost:4200/`.
 
-## Further help
+## Phase 3
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Coming up...
