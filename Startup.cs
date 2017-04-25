@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IO;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace NGCLIVS
 {
@@ -27,7 +28,12 @@ namespace NGCLIVS
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+
+				app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+				{
+					HotModuleReplacement = true
+				});
+			}
 
 			app.UseDefaultFiles();
 			app.UseStaticFiles();

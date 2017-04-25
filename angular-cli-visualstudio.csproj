@@ -10,6 +10,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="microsoft.AspNetCore.SpaServices" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
   </ItemGroup>
+  <Target Name="AngularBuild" AfterTargets="Build">
+    <Exec Command="webpack" />
+  </Target>
 </Project>

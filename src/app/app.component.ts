@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ng2cli-root',
+  selector: 'ng-cli-vs-root',
   templateUrl: './app.component.html',
   styles: []
 })
 export class AppComponent {
-  title = 'ng2cli works!';
+  title = 'Angular CLI in VS works :)';
 }
