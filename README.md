@@ -1,4 +1,13 @@
-﻿# Integrating Angular CLI with dotnet in Visual Studio
+﻿# Hit The Ground Running
+
+Clone repo.
+
+`npm run setup`
+
+Open solution in Visual Studio, choose either IIS Express or dotnet Kestrel and F5 or Ctrl-F5. Make a change and verify that the browser reloads with the change.  
+
+
+# Phases to integrate Angular CLI with dotnet in Visual Studio
 
 ## Phase 1
 
@@ -22,7 +31,11 @@ Make sure that you follow the instructions in this [article](https://blogs.msdn.
 
 Open a command prompt to your project folder and type in `dotnet add package Microsoft.AspNetCore.StaticFiles`.
 
-In Visual Studio open Startup.cs and remove the app.Run code inside the Configure section. Add `app.UseDefaultFiles(); app.UseStaticFiles();`
+In Visual Studio open Startup.cs and remove the app.Run code inside the Configure section. Add 
+```
+app.UseDefaultFiles();
+app.UseStaticFiles();
+```
 
 Change the outDir in the angular-cli.json from dist to wwwroot.
 
@@ -30,4 +43,54 @@ Now when you build your solution in Visual Studio it will kick off ng serve and 
 
 ## Phase 3
 
-Coming up...
+In this phase we are going to take over management of webpack and run everything through IIS Express or dotnet run.
+
+Replace npm start script in package.json to original version.
+
+Remove -vs-binding reference at bottom of package.json.
+
+Open a command prompt to your project folder and type in `ng eject`.
+
+Copy webpack.config.js, webpack.config.vendor.js and package.json from this [commit](https://github.com/calebcwells/angular-cli-visualstudio/tree/37a8a0ad31a63d01a399c574f8673c58d8c523f3).
+
+Edit your proj file to include 
+```
+<Target Name="AngularBuild" AfterTargets="Build">
+  <Exec Command="webpack" /> 
+</Target>
+```
+
+In a command prompt in your project folder and type in `dotnet add package Microsoft.AspNetCore.SpaServices`.
+
+In Startup.cs add
+```
+app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+{
+	HotModuleReplacement = true
+});
+```
+
+Open main.ts file and replace
+```
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+```
+with
+```
+if (module['hot']) {
+    module['hot'].accept();
+} else {
+    enableProdMode();
+}
+```
+
+Add references to vendor.css and vendor.js in index.html
+
+Open your project properties and under Debug make sure Environment Variables has `ASPNETCORE_ENVIRONMENT Development` as a name:value pair.
+
+In a command prompt in your project folder and type in `npm run buildFull`.
+
+You should now be able to run the solution in IIS Express or dotnet run with F5 or Ctrl-F5 with HMR.
